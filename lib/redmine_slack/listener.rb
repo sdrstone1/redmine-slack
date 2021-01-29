@@ -141,7 +141,9 @@ class SlackListener < Redmine::Hook::Listener
 		}
 
 		params[:username] = username if username
-		params[:channel] = channel if channel
+		
+		# Channel name '+' is reserved for notify to the default channel.
+		params[:channel] = channel if channel.to_s != '+'
 
 		params[:attachments] = [attachment] if attachment
 
